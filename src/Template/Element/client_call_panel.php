@@ -1,8 +1,14 @@
 <?php
+
+use Cake\Http\Client\Request;
+use Cake\Http\Client\Response;
+use Cake\View\AjaxView;
+
 /**
- * @var \Cake\View\AjaxView $this
- * @var array               $calls
+ * @var AjaxView $this
+ * @var array    $calls
  */
+
 $this->loadHelper('DebugHttp.Call');
 ?>
 <?php if (count($calls) == 0): ?>
@@ -12,8 +18,8 @@ $this->loadHelper('DebugHttp.Call');
         <?php foreach ($calls as $call): ?>
             <?php
             /**
-             * @var $request \Cake\Http\Client\Request
-             * @var $response \Cake\Http\Client\Response
+             * @var $request  Request
+             * @var $response Response
              */
             $request  = $call['request'];
             $response = $call['response'];
@@ -46,14 +52,14 @@ $this->loadHelper('DebugHttp.Call');
         <?php endforeach; ?>
     </ul>
     <script>
-        $(document).ready(function () {
-            $('.panel-content pre code:not(.raw)').each(function (i, block) {
+        $(document).ready(function() {
+            $('.panel-content pre code:not(.raw)').each(function(i, block) {
                 hljs.highlightBlock(block);
             });
         });
 
         new Clipboard('.panel-content .select-response', {
-            target: function (trigger) {
+            target: function(trigger) {
                 return $(trigger).siblings('pre').find('code:visible').get(0);
             }
         });

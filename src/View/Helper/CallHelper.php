@@ -23,7 +23,7 @@ class CallHelper extends Helper
      *
      * @return string Span for method
      */
-    public function method($method)
+    public function method(string $method): string
     {
         return $this->Html->tag('span', strtoupper($method), ['class' => 'method method-' . strtolower($method)]);
     }
@@ -35,7 +35,7 @@ class CallHelper extends Helper
      *
      * @return string Span for code
      */
-    public function code($code)
+    public function code(int $code): string
     {
         $codeRounded = ((int)($code / 100)) * 100;
 
@@ -49,7 +49,7 @@ class CallHelper extends Helper
      *
      * @return string Span with time in milliseconds
      */
-    public function time($time)
+    public function time(float $time): string
     {
         return $this->Html->tag('span', $time * 1000 . ' ms', ['class' => 'time']);
     }
@@ -58,11 +58,11 @@ class CallHelper extends Helper
      * Formatted headers of a request/response
      *
      * @param array  $headers Key value pairs of headers
-     * @param string $name Title of the headers table
+     * @param string|null $name Title of the headers table
      *
      * @return string Table with headers
      */
-    public function headers($headers, $name = null)
+    public function headers(array $headers, ?string $name = null): string
     {
         $html = '';
         if ($name) {
@@ -86,7 +86,7 @@ class CallHelper extends Helper
      *
      * @return string
      */
-    public function body($content, $types)
+    public function body(string $content, $types): string
     {
         if (empty($content)) {
             return '<pre data-format-text><span style="color:darkgrey;">Empty body</span></pre>';
@@ -153,7 +153,7 @@ class CallHelper extends Helper
      *
      * @return string
      */
-    public function stackTrace($trace)
+    public function stackTrace(string $trace): string
     {
         $trace = str_replace("\n", '<br/>', $trace);
 

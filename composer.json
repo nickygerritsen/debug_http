@@ -21,8 +21,11 @@
     "source": "https://github.com/dorxy/debug_http"
   },
   "require": {
-    "cakephp/cakephp": "~3.4",
-    "cakephp/debug_kit": "~3.3"
+    "php": ">=7.4",
+    "ext-json": "*",
+    "ext-dom": "*",
+    "cakephp/cakephp": "~4.2.0",
+    "cakephp/debug_kit": "^4.4"
   },
   "require-dev": {
     "phpunit/phpunit": "*",

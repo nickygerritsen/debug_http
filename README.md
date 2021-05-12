@@ -12,16 +12,16 @@ DebugHttp gives the [CakePHP DebugKit](https://github.com/cakephp/debug_kit) plu
 
 ## Requirements
 
-The `master` branch has the following requirements:
+The `cakephp-4` branch has the following requirements:
 
-* CakePHP 3.4.0 or larger
-* DebugKit 3.2 or larger
+* CakePHP 4.2.0 or larger
+* DebugKit 4.4 or larger
 
 ## Installation
 
 * Install the plugin with [Composer](https://getcomposer.org/) from your CakePHP Project's ROOT directory (where the **composer.json** file is located)
 ```sh
-php composer.phar require dorxy/debug_http "~1.0"
+php composer.phar require dorxy/debug_http "dev-cakephp-4"
 ```
 _note this is not a dev requirement_
 

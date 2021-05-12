@@ -5,7 +5,8 @@ namespace DebugHttp\Panel;
 use Cake\Controller\Controller;
 use Cake\Core\StaticConfigTrait;
 use Cake\Error\Debugger;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
+use Cake\Http\Response;
 use Cake\Routing\Router;
 use DebugKit\Controller\RequestsController;
 use DebugKit\DebugPanel;
@@ -26,7 +27,7 @@ class ClientCallPanel extends DebugPanel
      *
      * @return int
      */
-    public function summary()
+    public function summary(): int
     {
         if (!static::getConfig('calls')) {
             return 0;
@@ -40,7 +41,7 @@ class ClientCallPanel extends DebugPanel
      *
      * @return string
      */
-    public function title()
+    public function title(): string
     {
         return 'Client Calls';
     }
@@ -48,7 +49,7 @@ class ClientCallPanel extends DebugPanel
     /**
      * Get the panel data
      */
-    public function data()
+    public function data(): array
     {
         return ['calls' => static::getConfig('calls') ?: []];
     }
@@ -58,9 +59,9 @@ class ClientCallPanel extends DebugPanel
      *
      * @param RequestInterface  $request  Call request
      * @param ResponseInterface $response Call response
-     * @param float             $time     duration of the call
+     * @param float|null        $time     duration of the call
      */
-    public static function addCall(RequestInterface $request, ResponseInterface $response, $time = null)
+    public static function addCall(RequestInterface $request, ResponseInterface $response, ?float $time = null)
     {
         $calls   = static::getConfig('calls');
         $trace   = Debugger::trace(['start' => 2]);
@@ -88,11 +89,11 @@ class ClientCallPanel extends DebugPanel
     /**
      * Shutdown callback
      *
-     * @param \Cake\Event\Event $event The event.
+     * @param EventInterface $event The event.
      *
      * @return void
      */
-    public function shutdown(Event $event)
+    public function shutdown(EventInterface $event)
     {
         /**
          * @var $controller Controller;
@@ -109,11 +110,11 @@ class ClientCallPanel extends DebugPanel
      * The toolbar will only be injected if the response's content type
      * contains HTML and there is a </body> tag.
      *
-     * @param \Cake\Network\Response $response The response to augment.
+     * @param Response $response The response to augment.
      *
-     * @return \Cake\Network\Response
+     * @return Response
      */
-    protected function _injectScriptsAndStyles($response)
+    protected function _injectScriptsAndStyles($response): Response
     {
         if (strpos($response->getType(), 'html') === false) {
             return $response;
